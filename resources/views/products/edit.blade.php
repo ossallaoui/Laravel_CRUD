@@ -4,14 +4,15 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="pull-left">
-				<h3>Add New Product</h3>
+				<h3>Edit Product</h3>
 			</div>
 			<div class="pull-right">
-				<a class="btn btn-success" href="{{ route('products.index') }}">Back To Product</a>
+				<a class="btn btn-success" href="{{ route('products.index') }}">Back To Product List</a>
 			</div>
 		</div>
 	</div>
-	@if($errors->any())
+
+@if($errors->any())
 		<div class="alert alert-danger">
 			<strong>Ops! </strong>Something went wrong.
 			<ul>
@@ -22,14 +23,15 @@
 		</div>
 
 	@endif
-
-	<form action="{{ route('products.store') }}" method="POST">
+	
+	<form action="{{ route('products.update', $product->id) }}" method="POST">
 			@csrf
+			@method("PUT")
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="form-group">
 						<strong>Name:</strong>
-						<input type="text" name="name" class="form-control" placeholder="Name">
+						<input type="text" name="name" value="{{ $product->name }}" class="form-control" placeholder="Name">
 					</div>
 				</div>
 
@@ -37,13 +39,13 @@
 					<div class="form-group">
 						<strong>Detail:</strong>
 						<textarea name="detail" placeholder="detail" class="form-control">
-							
+							{{ $product->detail }}
 						</textarea>
 					</div>
 				</div>
 				<div class="col-lg-12">
 					
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary">Update</button>
 				</div>
 			</div>
 	</form>
